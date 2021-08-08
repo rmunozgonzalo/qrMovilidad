@@ -19,6 +19,7 @@ def getQrCode(frame):
         print(qrTextCode)
     return frame, qrTextCode
 
+
 def main():
     #Get video webcam
     camera = cv2.VideoCapture(0)
@@ -28,7 +29,12 @@ def main():
         ret, frame = camera.read()
         #Convert gray
         #frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        frame,qrTextCode = getQrCode(frame)
+        # Remove noise and unnecessary contours from frame
+        #gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        #gray = cv2.bilateralFilter(gray, 11, 17, 17)
+        #gray = cv2.GaussianBlur(gray, (3, 3), 0)
+
+        frame,qrTextCode = getQrCode(gray)
         #Show frame
         cv2.imshow('QR frame', frame)
         if cv2.waitKey(1) & 0xFF == 27:
